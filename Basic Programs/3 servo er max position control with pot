@@ -1,0 +1,66 @@
+#include <Servo.h>
+Servo servo1, servo2, servo3;
+
+unsigned long t1, t2, t3;
+
+int s1_min = 0, s1_pos = 0;
+int s2_min = 40, s2_pos = 0;
+int s3_min = 50,  s3_pos = 0;
+bool dir1 = 1, dir2 = 1, dir3 = 1;
+
+int s1_max,s2_max,s3_max;
+
+void setup() {
+  Serial.begin(9600);
+  servo1.attach(11);
+  servo2.attach(10);
+  servo3.attach(9);
+  s1_pos = s1_min;
+  s2_pos = s2_min;
+  s3_pos = s3_min;
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int sensorValue = analogRead(A0);
+  Serial.println(sensorValue);
+  delay(500);
+  int mappedValue1 = map(sensorValue, 0, 1023, 1, 180); // range becomes from (0 - 1023) to (51-180)
+  Serial.println(mappedValue1);
+  delay(500);
+  int mappedValue2 = map(sensorValue, 0, 1023, 41, 180);
+  Serial.println(mappedValue2);
+  delay(500);
+  int mappedValue3 = map(sensorValue, 0, 1023, 51, 180);
+  Serial.println(mappedValue3);
+  delay(500);
+
+  s1_max = mappedValue1;
+  s2_max = mappedValue2;
+  s3_max = mappedValue3;
+
+  if((millis()- t1) > 10)
+  {
+    t1 = millis();
+    (dir1) ? s1_pos++ : s1_pos--;
+    if (s1_pos == s1_max) dir1 = 0;
+    if (s1_pos == s1_min) dir1 = 1;
+    servo1.write(s1_pos);
+  }
+
+  if ((millis() - t2) > 500) {
+    t2 = millis();
+    (dir2) ? s2_pos++ : s2_pos--;
+    if (s2_pos == s2_max) dir2 = 0;
+    if (s2_pos == s2_min) dir2 = 1;
+    servo2.write(s2_pos);
+  }
+
+  if ((millis() - t3) > 1000) {
+    t3 = millis();
+    (dir3) ? s3_pos++ : s3_pos--;
+    if (s3_pos == s3_max) dir3 = 0;
+    if (s3_pos == s3_min) dir3 = 1;
+    servo3.write(s3_pos);
+  }
+}
