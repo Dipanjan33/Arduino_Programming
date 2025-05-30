@@ -10,7 +10,7 @@ bool dir1 = 1, dir2 = 1, dir3 = 1;
 
 void setup() {
   Serial.begin(9600);
-  servo1.attach(11);
+  servo1.attach(11);//servo is always attached to pwm pins
   servo2.attach(10);
   servo3.attach(9);
   s1_pos = s1_min;
