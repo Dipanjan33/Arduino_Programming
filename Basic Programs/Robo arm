@@ -4,15 +4,15 @@ Servo servo1, servo2, servo3, servo4;
 unsigned long t1, t2, t3, t4;
 
 int s1_pos = 90;
-int s2_pos = 0;
-int s3_pos = 0;
-int s4_pos = 0;
+int s2_pos = 60;
+int s3_pos = 60;
+int s4_pos = 60;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  servo1.attach(11);
-  servo2.attach(10);
+  servo1.attach(3);
+  servo2.attach(11);
   servo3.attach(9);
   servo4.attach(6);
   servo1.write(90);
@@ -34,39 +34,31 @@ void loop() {
     t1 = millis();
     if(sensorValue1 > 600)
     {
-      if(s1_pos < 180) s1_pos++;
+      if(s1_pos < 140) s1_pos++;
     }
-    servo1.write(s1_pos);
-  }
-  if((millis()- t1) > 10)
-  {
-    t1 = millis();
-    if(sensorValue1 < 500)
+    if(sensorValue1 < 300)
     {
       if(s1_pos > 90) s1_pos--;
     }
     servo1.write(s1_pos);
   }
+  
 
 
-  if((millis()- t2) > 100)
+  if((millis()- t2) > 20)
   {
     t2 = millis();
     if(sensorValue2 > 600)
     {
-      if(s2_pos < 180) s2_pos++;
+      if(s2_pos < 140) s2_pos++;
     }
-    servo2.write(s2_pos);
-  }
-  if((millis()- t2) > 100)
-  {
-    t2 = millis();
-    if(sensorValue2 < 500)
+    if(sensorValue2 < 300)
     {
-      if(s2_pos > 0) s2_pos--;
+      if(s2_pos > 60) s2_pos--;
     }
     servo2.write(s2_pos);
   }
+  
 
 
   if((millis()- t3) > 10)
@@ -74,19 +66,15 @@ void loop() {
     t3 = millis();
     if(sensorValue3 > 600)
     {
-      if(s3_pos < 180) s3_pos++;
+      if(s3_pos < 140) s3_pos++;
     }
-    servo3.write(s3_pos);
-  }
-  if((millis()- t3) > 10)
-  {
-    t3 = millis();
-    if(sensorValue3 < 500)
+    if(sensorValue3 < 300)
     {
-      if(s3_pos > 0) s3_pos--;
+      if(s3_pos > 60) s3_pos--;
     }
     servo3.write(s3_pos);
   }
+ 
   
 
   if((millis()- t4) > 10)
@@ -94,19 +82,15 @@ void loop() {
     t4 = millis();
     if(sensorValue4 > 600)
     {
-      if(s4_pos < 180) s4_pos++;
+      if(s4_pos < 140) s4_pos++;
     }
-    servo4.write(s4_pos);
-  }
-  if((millis()- t4) > 10)
-  {
-    t4 = millis();
-    if(sensorValue4 < 500)
+    if(sensorValue4 < 300)
     {
-      if(s4_pos > 0) s4_pos--;
+      if(s4_pos > 60) s4_pos--;
     }
     servo4.write(s4_pos);
   }
 
 }
+
 
