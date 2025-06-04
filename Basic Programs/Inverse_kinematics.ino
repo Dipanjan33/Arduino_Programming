@@ -65,7 +65,7 @@ void inverse_kinematics() {
   float r = sqrt((float)(x * x + y * y));
 
   if (d < 130 && d > 20) {
-    int alpha = atan((float)z / r) * ((float)180 / PI);
+    int alpha = atan((float)z / r) * ((float)180 / PI);// atan means tan inverse
     int beta = acos((float)d / (2 * arm_l)) * ((float)180 / PI);
     desired_angle[0] = (atan((float)y / z) * ((float)180 / PI));  //theta 1
     desired_angle[1] = 180 - (alpha + beta);                      // theta 2
